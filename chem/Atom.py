@@ -1,6 +1,14 @@
 # -*- coding: utf-8 -*-
 
 
+class MendeleevTable():
+    def __init__(self):
+        pass
+
+    def get_symbol_by_atom(self, atom):
+        pass
+
+
 class Electron:
     mass = 0.002  # moll. Габриелян 8класс 21стр.
     speed = 300000  # km/sec. близка к скорости света. Меньшее ее, что соответствует наличию массы
@@ -28,14 +36,27 @@ class Neutron:
         pass
 
 
+class AtomicOrbital:
+    """ Атомная орбита электронов
+    """
+
+    level = None
+
+    def __init__(self):
+        pass
+
+    def get_max_electron(self):
+        return 2 * self.level ** 2
+
+
 class Atom(object):
     symbol = None
     mass = None
 
     electron_count = None
     proton_count = None  # изменение количества протонов изменяет само вещество. Например водород в азот
-
     neutron_count = None  # изменение количества нейтронов не сильно влиеяет на физ.качества вещества.
+    orbit_count = None
 
     def __new__(cls, element_list=None):
         if cls is not Atom:
@@ -65,6 +86,14 @@ class Atom(object):
         """
         return self.mass
 
+    def get_orbit_count(self):
+        """ Соответствует периоду в таб.Менделеева
+        """
+        return self.orbit_count
+
+    def get_electron_count(self):
+        return self.proton_count
+
     def get_real_mass(self):
         return self.proton_count + self.neutron_count
 
@@ -92,18 +121,21 @@ class Nitrogen(Atom):
     proton_count = 7
     symbol = 'N'
     mass = 14.00674
+    orbit_count = 2
 
 
 class Hydrogen(Atom):
     proton_count = 1
     symbol = 'H'
     mass = 1.00794
+    orbit_count = 1
 
 
 class Oxygen(Atom):
     proton_count = 8
     symbol = 'O'
     mass = 15.9994
+    orbit_count = 2
 
 
 if __name__ == '__main__':
